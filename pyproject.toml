@@ -2,8 +2,7 @@
 name = "kito"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
-license = "MIT"
+authors = ["Aleksander Pucher <pucher.aleksander@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
