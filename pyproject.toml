@@ -12,6 +12,11 @@ gunicorn = "^20.1.0"
 psycopg2-binary = "^2.9.3"
 
 [tool.poetry.dev-dependencies]
+mypy = "*"
+pytest = "^7.1.2"
+djangorestframework-stubs = "^1.5.0"
+django-stubs = "^1.10.1"
+pytest-django = "^4.5.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
