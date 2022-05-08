@@ -25,9 +25,13 @@ jobs:
         run: docker push $IMAGE_TAG
 
   Run_tests:
-    runs-on: ubuntu-latest
-    container: ${{ env.IMAGE_TAG }}
     needs: Build_and_push
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ env.IMAGE_TAG }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     services:
       db:
         image: postgres
