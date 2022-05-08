@@ -52,8 +52,6 @@ jobs:
       - name: Run tests
         run: |
           cd /var/kito
-          ls
-          pwd
-          poetry shell
-          ls pyproject.toml
-          pip freeze
+          poetry config --list
+          poetry run pip freeze
+          poetry run pytest

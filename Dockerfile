@@ -4,6 +4,7 @@ WORKDIR /var/kito/
 COPY . .
 
 RUN pip install poetry
+RUN poetry config virtualenvs.in-project true
 RUN poetry install
 
-CMD poetry run gunicorn -w 4 -b 0.0.0.0:8000 kito.wsgi 
+CMD poetry run gunicorn -w 4 -b 0.0.0.0:8000 kito.wsgi
