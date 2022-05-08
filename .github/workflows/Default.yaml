@@ -47,11 +47,11 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+    env:
+      POETRY_VIRTUALENVS_PATH: /root/.cache/pypoetry/virtualenvs
 
     steps:
       - name: Run tests
         run: |
           cd /var/kito
-          poetry config --list
-          poetry run pip freeze
           poetry run pytest
