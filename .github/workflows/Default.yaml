@@ -1,4 +1,4 @@
-name: Build and push image to ghcr.io
+name: Default workflow
 
 on:
   push:
@@ -10,7 +10,7 @@ env:
   IMAGE_TAG: ghcr.io/${{ github.repository }}:${{ github.sha }}
 
 jobs:
-  Build_and_push:
+  Build_image_and_push_to_registry:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,8 +18,12 @@ jobs:
       - name: Build image
         run: docker build . --file Dockerfile --tag $IMAGE_TAG
 
-      - name: Log in to registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push image
         run: docker push $IMAGE_TAG
@@ -48,3 +52,4 @@ jobs:
       - name: Run tests
         run: |
           cd /var/kito
+          pytest
