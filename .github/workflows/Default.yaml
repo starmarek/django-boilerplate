@@ -28,7 +28,7 @@ jobs:
       - name: Push image
         run: docker push $IMAGE_TAG
 
-  Run_tests:
+  Utests:
     needs: Build_image_and_push_to_registry
     runs-on: ubuntu-latest
     container:
@@ -51,7 +51,43 @@ jobs:
       POETRY_VIRTUALENVS_PATH: /root/.cache/pypoetry/virtualenvs
 
     steps:
-      - name: Run tests
+      - name: Utests
         run: |
           cd /var/kito
           poetry run pytest
+
+  Static_analysis:
+    needs: Build_image_and_push_to_registry
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository }}:${{ github.sha }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    env:
+      POETRY_VIRTUALENVS_PATH: /root/.cache/pypoetry/virtualenvs
+
+    steps:
+      - name: Isort
+        run: |
+          cd /var/kito
+          poetry run isort --check .
+
+      - name: Black
+        if: always()
+        run: |
+          cd /var/kito
+          poetry run black --check .
+
+      - name: Mypy
+        if: always()
+        run: |
+          cd /var/kito
+          poetry run mypy .
+
+      - name: Flake8
+        if: always()
+        run: |
+          cd /var/kito
+          poetry run flake8 .
+
