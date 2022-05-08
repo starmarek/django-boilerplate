@@ -52,4 +52,4 @@ jobs:
       - name: Run tests
         run: |
           cd /var/kito
-          pytest
+          poetry run pytest
