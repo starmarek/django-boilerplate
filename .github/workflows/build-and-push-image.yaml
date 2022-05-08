@@ -7,7 +7,7 @@ on:
   pull_request:
 
 env:
-  IMAGE_TAG: ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
+  IMAGE_TAG: ghcr.io/{{ github.repository }}:{{ github.sha }}
 
 jobs:
   docker:
