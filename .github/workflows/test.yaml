@@ -16,8 +16,8 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Pull Image from ghcr.io
-      run: docker pull ghcr.io/${{ github.repository }}:${{ github.sha }}
+      - name: Pull Image from ghcr.io
+        run: docker pull ghcr.io/${{ github.repository }}:${{ github.sha }}
   Run_tests:
     runs-on: ubuntu-latest
     container: ghcr.io/${{ github.repository }}:${{ github.sha }}
