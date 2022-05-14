@@ -1,5 +1,9 @@
 .gitignore
 .git
 Dockerfile
+Dockerfile.nginx
+README.md
+pycharm_settings.zip
+docker-compose.yaml
 .idea
 db.sqlite3

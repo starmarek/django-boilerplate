@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:14.2
+    ports:
+      - 5432:5432
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    healthcheck:
+      test: /usr/bin/pg_isready
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  example:
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/var/example
+    depends_on:
+      - db
+
+  nginx:
+    build:
+      dockerfile: ./Dockerfile.nginx
+      context: .
+    ports:
+      - 80:80
+    volumes:
+      - static_files:/var/nginx
+    depends_on:
+      - example
+
+
+
+volumes:
+  dbdata:
+  static_files:
