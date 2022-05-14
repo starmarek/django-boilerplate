@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "kito"
+name = "example"
 version = "0.1.0"
 description = ""
-authors = ["Aleksander Pucher <pucher.aleksander@gmail.com>"]
+authors = []
 
 [tool.poetry.dependencies]
 python = "^3.10"

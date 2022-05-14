@@ -53,7 +53,7 @@ jobs:
     steps:
       - name: Utests
         run: |
-          cd /var/kito
+          cd /var/example
           poetry run pytest
 
   Static_analysis:
@@ -70,24 +70,24 @@ jobs:
     steps:
       - name: Isort
         run: |
-          cd /var/kito
+          cd /var/example
           poetry run isort --check .
 
       - name: Black
         if: always()
         run: |
-          cd /var/kito
+          cd /var/example
           poetry run black --check .
 
       - name: Mypy
         if: always()
         run: |
-          cd /var/kito
+          cd /var/example
           poetry run mypy .
 
       - name: Flake8
         if: always()
         run: |
-          cd /var/kito
+          cd /var/example
           poetry run flake8 .
 
